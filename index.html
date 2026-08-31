@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Tối ưu toàn diện cho Mobile Safari (iOS) & Chrome (Android / iOS) -->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Happy Birthday Em Bé">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Happy Birthday Em Bé">
+    <meta name="theme-color" content="#ffeef2">
+
+    <title>Happy Birthday Em Bé Iuuu ❤️ | 01.09.2003</title>
+
+    <!-- Google Fonts: Quicksand & Nunito (100% tiếng Việt không lỗi dấu), Dancing Script & Caveat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Dancing+Script:wght@600;700&family=Nunito:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Canvas Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Background Particles & Ambient Glows -->
+    <div class="ambient-background">
+        <div class="glow-sphere sphere-1"></div>
+        <div class="glow-sphere sphere-2"></div>
+        <div class="glow-sphere sphere-3"></div>
+        <div id="bubbles-container"></div>
+        <div id="hearts-container"></div>
+    </div>
+
+    <!-- MÀN HÌNH KHÓA / WELCOME OVERLAY (Mở đầu ấn tượng & Unlock Safari Audio) -->
+    <div id="welcome-overlay" class="welcome-overlay">
+        <div class="welcome-card glass-panel">
+            <div class="envelope-badge">💌 Ngàn lời đặc biệt anh gửi đến em</div>
+            <div class="avatar-ring pulse">
+                <img src="assets/avatar.JPG" alt="Avatar Em bé iuuu" class="avatar-img">
+            </div>
+            <h1 class="welcome-title font-handwriting">Gửi Em bé iuuu ❤️</h1>
+            <p id="typewriter-text" class="typewriter-text"></p>
+            <div class="birthday-date-tag">🗓️ 01 . 09 . 2003</div>
+
+            <button id="start-btn" class="primary-btn pulse-btn" aria-label="Khám phá quà sinh nhật">
+                <span>Khám phá món quà ✨</span>
+            </button>
+            <p class="tap-hint">Chạm để bật nhạc & mở quà nhé!</p>
+        </div>
+    </div>
+
+    <!-- FLOATING MUSIC CONTROLLER (Đĩa xoay phát nhạc - Mặc định thu nhỏ) -->
+    <div id="music-player" class="music-player-pill glass-pill hidden-init minimized">
+        <div class="disc-wrapper" id="music-disc-toggle" title="Thu nhỏ / Mở rộng">
+            <div class="vinyl-disc spinning" id="vinyl-disc">
+                <div class="disc-core">🎵</div>
+            </div>
+        </div>
+        <div class="song-info" id="song-info-wrapper">
+            <span class="song-name">Until I Found You ✨</span>
+            <span class="song-status" id="music-status">Đang phát nhạc 🎶</span>
+        </div>
+        <div class="music-controls-group">
+            <button id="toggle-music-btn" class="music-toggle-btn" aria-label="Play/Pause Music"
+                title="Phát / Dừng nhạc">
+                <span id="music-icon">⏸️</span>
+            </button>
+            <button id="collapse-music-btn" class="music-collapse-btn" aria-label="Thu nhỏ trình phát" title="Thu nhỏ">
+                <span>−</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- VERTICAL SECTION NAVIGATION DOTS -->
+    <div class="page-nav hidden-init" id="page-nav">
+        <span class="page-dot active" data-index="0" title="Trang chủ"></span>
+        <span class="page-dot" data-index="1" title="Thổi nến"></span>
+        <span class="page-dot" data-index="2" title="Kỷ niệm"></span>
+        <span class="page-dot" data-index="3" title="Món quà"></span>
+        <span class="page-dot" data-index="4" title="Thư tình"></span>
+    </div>
+
+    <!-- MAIN APP WRAPPER -->
+    <main class="main-content" id="main-content">
+
+        <!-- SECTION 1: HERO & LỜI CHÀO TUỔI MỚI -->
+        <section class="section hero-section" id="hero-section">
+            <div class="hero-header fade-up">
+                <div class="sparkle-pill">✨ Ngày sinh nhật của công chúa ✨</div>
+                <h1 class="main-title font-handwriting gradient-text">Happy Birthday!</h1>
+                <p class="recipient-name">Em bé Hồng Oanh đáng iu ❤️</p>
+                <div class="date-badge">01 tháng 09</div>
+            </div>
+
+            <!-- Love Journey Counter / Age Tag -->
+            <div class="counter-card glass-panel fade-up delay-1">
+                <div class="counter-item">
+                    <span class="counter-num">Có nhiều</span>
+                    <span class="counter-label">Niềm vui</span>
+                </div>
+                <div class="counter-divider">💖</div>
+                <div class="counter-item">
+                    <span class="counter-num" id="age-num">Mãi mãi</span>
+                    <span class="counter-label">Xinh đẹp</span>
+                </div>
+                <div class="counter-divider">💖</div>
+                <div class="counter-item">
+                    <span class="counter-num">Tràn ngập</span>
+                    <span class="counter-label">Hạnh phúc</span>
+                </div>
+            </div>
+
+            <div class="scroll-prompt">
+                <span>Vuốt xuống để thổi nến</span>
+                <div class="mouse-indicator">
+                    <div class="mouse-wheel"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: BÁNH KEM & THỔI NẾN TƯƠNG TÁC -->
+        <section class="section cake-section" id="cake-section">
+            <div class="section-badge fade-up">🎂 Ước một điều ước nhé</div>
+            <h2 class="section-title font-handwriting fade-up">Thổi Nến Sinh Nhật</h2>
+            <p class="section-desc fade-up">Nhắm mắt ước một điều ước thật đẹp rồi chạm vào ngọn nến để thổi nhé!</p>
+
+            <div class="cake-container fade-up delay-1" id="cake-wrapper">
+                <!-- 3D Layered Birthday Cake in CSS -->
+                <div class="cake-plate"></div>
+                <div class="cake">
+                    <!-- Candle -->
+                    <div class="candle" id="candle">
+                        <div class="flame" id="flame">
+                            <div class="flame-glow"></div>
+                        </div>
+                        <div class="smoke" id="smoke"></div>
+                        <div class="wick"></div>
+                        <div class="candle-stick"></div>
+                    </div>
+                    <!-- Cake Top Layer -->
+                    <div class="cake-layer cake-layer-top">
+                        <div class="frosting-drops">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                        <div class="strawberries">
+                            <span class="berry">🎀</span>
+                            <span class="berry">🎀</span>
+                            <span class="berry">🎀</span>
+                            <span class="berry">🎀</span>
+                        </div>
+                    </div>
+                    <!-- Cake Bottom Layer -->
+                    <div class="cake-layer cake-layer-bottom">
+                        <div class="cream-layer"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Button for Candle -->
+            <button id="blow-candle-btn" class="action-btn blow-btn fade-up delay-2">
+                <span class="btn-icon">🌬️</span>
+                <span id="blow-btn-text">Chạm để thổi nến ✨</span>
+            </button>
+
+            <!-- Wish Revealed Modal / Message -->
+            <div id="wish-banner" class="wish-banner glass-panel hidden">
+                <div class="wish-icon">🌟</div>
+                <h3 class="font-handwriting wish-title">Điều ước đã được gửi đi!</h3>
+                <p class="wish-text">Mong mọi ước mơ của Em bé iuuu trong tuổi mới đều sẽ trở thành hiện thực, luôn vui
+                    tươi, rạng rỡ và mãi là công chúa nhỏ của anh! 💖✨</p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: THƯ VIỆN KỶ NIỆM (15 TẤM ẢNH TÌNH YÊU) -->
+        <section class="section gallery-section" id="gallery-section">
+            <div class="section-badge fade-up">📸 Kỷ niệm ngọt ngào</div>
+            <h2 class="section-title font-handwriting fade-up">Khoảnh Khắc Cùng Em</h2>
+            <p class="section-desc fade-up">Chạm vào ảnh để thả tim hoặc phóng to nhé! 💖</p>
+
+            <!-- Carousel Frame & 3D Controls -->
+            <div class="gallery-wrapper fade-up delay-1">
+                <!-- Nav Prev Button -->
+                <button class="gallery-nav-btn prev-btn" id="gallery-prev" aria-label="Ảnh trước">‹</button>
+
+                <!-- Carousel Container -->
+                <div class="carousel-container" id="carousel-container">
+                    <div class="carousel-track" id="carousel-track">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide" data-index="0">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/1.JPG" alt="Kỷ niệm 1" class="polaroid-img" loading="eager">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Chúc mừng sinh nhật công chúa cụa anh ✨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="carousel-slide" data-index="1">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/2.JPG" alt="Kỷ niệm 2" class="polaroid-img" loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Mỗi khoảnh khắc bên em đều là món quà 🌸</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="carousel-slide" data-index="2">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/3.JPG" alt="Kỷ niệm 3" class="polaroid-img" loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Cô gái tháng 9 đáng iuu nhất của anh 🥰</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="carousel-slide" data-index="3">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/4.JPG" alt="Kỷ niệm 4" class="polaroid-img" loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Cùng em băng qua bao đại dương 🍨</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 5 -->
+                        <div class="carousel-slide" data-index="4">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/5.JPG" alt="Kỷ niệm 5" class="polaroid-img" loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Em bé ngoan xinh iuu của anh 🌷</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 6 -->
+                        <div class="carousel-slide" data-index="5">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/6.JPG" alt="Kỷ niệm 6" class="polaroid-img" loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Cùng em đi vượt ngàn con đường 💫</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 7 -->
+                        <div class="carousel-slide" data-index="6">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/7.JPG" alt="Kỷ niệm 7" class="polaroid-img" loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Bình yên nhất là khi có em kề bên 🌹</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 8 -->
+                        <div class="carousel-slide" data-index="7">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/8.JPG" alt="Kỷ niệm 8" class="polaroid-img" loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Cảm ơn em vì đã đến bên cuộc đời anh 💌</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 9 -->
+                        <div class="carousel-slide" data-index="8">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/9.JPG" alt="Kỷ niệm 9" class="polaroid-img" loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Chúc công chúa luôn rạng rỡ thế này nhé 👑</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 10 -->
+                        <div class="carousel-slide" data-index="9">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/10.JPG" alt="Kỷ niệm 10" class="polaroid-img"
+                                        loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Muốn cùng em tràn ngập tiếng cười 🎡</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 11 -->
+                        <div class="carousel-slide" data-index="10">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/11.JPG" alt="Kỷ niệm 11" class="polaroid-img"
+                                        loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Yêu từng phút, từng giây cùng em 🎀</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 12 -->
+                        <div class="carousel-slide" data-index="11">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/12.JPG" alt="Kỷ niệm 12" class="polaroid-img"
+                                        loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Muốn nắm tay em đi qua mọi chông gai cuộc đời 🌈</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 13 -->
+                        <div class="carousel-slide" data-index="12">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/13.JPG" alt="Kỷ niệm 13" class="polaroid-img"
+                                        loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Hạnh phúc đơn giản là ngắm em cười 🍓</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 14 -->
+                        <div class="carousel-slide" data-index="13">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/14.JPG" alt="Kỷ niệm 14" class="polaroid-img"
+                                        loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Tuổi mới chúc em vạn điều như ý 🎂</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Slide 15 -->
+                        <div class="carousel-slide" data-index="14">
+                            <div class="polaroid-card">
+                                <div class="polaroid-heart-badge">💖</div>
+                                <div class="polaroid-img-wrapper">
+                                    <img src="assets/images/15.JPG" alt="Kỷ niệm 15" class="polaroid-img"
+                                        loading="lazy">
+                                </div>
+                                <div class="polaroid-caption font-handwriting">
+                                    <span>Yêu em nhiều hơn mỗi ngày trôi qua ❤️</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nav Next Button -->
+                <button class="gallery-nav-btn next-btn" id="gallery-next" aria-label="Ảnh tiếp">›</button>
+            </div>
+
+            <!-- Gallery Progress Bar & Counter -->
+            <div class="gallery-counter-pill">
+                <span id="gallery-current-num">01</span>
+                <div class="gallery-progress-track">
+                    <div class="gallery-progress-fill" id="gallery-progress-fill"></div>
+                </div>
+                <span>15</span>
+            </div>
+
+            <div class="swipe-hint">👈 Vuốt ngang hoặc bấm nút chuyển ảnh 👉</div>
+        </section>
+
+        <!-- PHOTO LIGHTBOX POPUP MODAL -->
+        <div id="photo-lightbox" class="photo-lightbox hidden">
+            <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+            <div class="lightbox-content glass-panel">
+                <button class="lightbox-close" id="lightbox-close" aria-label="Đóng">✕</button>
+                <div class="lightbox-img-wrapper">
+                    <img src="" alt="Phóng to ảnh" id="lightbox-img">
+                </div>
+                <p id="lightbox-caption" class="lightbox-caption font-handwriting"></p>
+                <div class="lightbox-heart-hint">💖 Chạm vào ảnh để thả tim!</div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: MINI-GAME VÒNG QUAY TÌNH YÊU (LUCKY WHEEL) -->
+        <section class="section wheel-section" id="wheel-section">
+            <div class="section-badge fade-up">🎡 Mini Game</div>
+            <h2 class="section-title font-handwriting fade-up">Vòng Quay Vui Vẻ</h2>
+            <p class="section-desc fade-up">Nếu như một ngày em thấy chán ơi là chán, thì em rút nó ra quay 💖
+                Anh sẽ đáp ứng đúng các điều kiện mà em quay được nhaaa 😘
+            </p>
+
+            <div class="wheel-outer-wrapper fade-up delay-1">
+                <!-- Pointer indicator at top -->
+                <div class="wheel-pointer">
+                    <span class="pointer-arrow">🔻</span>
+                </div>
+
+                <!-- Canvas / Rotating Wheel -->
+                <div class="wheel-container" id="wheel-container">
+                    <canvas id="wheel-canvas" width="300" height="300"></canvas>
+                </div>
+
+                <!-- Center Spin Button -->
+                <button id="spin-btn" class="wheel-spin-btn" aria-label="Quay trúng gì nè">
+                    <span class="spin-btn-text">QUAY<br>NÈ</span>
+                </button>
+            </div>
+
+            <!-- Result Box / Reward Popup -->
+            <div id="wheel-result-banner" class="wheel-result-banner glass-panel hidden">
+                <div class="result-badge">🎉 CHÚC MỪNG EM BÉ IU 🎉</div>
+                <div id="wheel-result-title" class="result-title font-handwriting"></div>
+                <p class="result-desc">Hãy bắt anh thực hiện liền đi nè! 😘</p>
+                <button id="spin-again-btn" class="spin-again-btn">Hừ không thích, quay lại lần nữa 🎡</button>
+            </div>
+        </section>
+
+        <!-- SECTION 4 (TẠM ẨN): MINI-GAME THẺ CÀO MAY MẮN (SCRATCH CARD)
+        <section class="section scratch-section" id="scratch-section">
+            <div class="section-badge fade-up">🎁 Món quà bí mật</div>
+            <h2 class="section-title font-handwriting fade-up">Cào Thẻ Trúng Thưởng</h2>
+            <p class="section-desc fade-up">Dùng ngón tay cào lớp nhũ lấp lánh để nhận phần quà đặc biệt từ anh nhé!</p>
+
+            <div class="scratch-card-container glass-panel fade-up delay-1">
+                <div class="scratch-reward" id="scratch-reward">
+                    <div class="reward-ribbon">👑 VOUCHER ĐẶC QUYỀN 👑</div>
+                    <div class="reward-title font-handwriting">Chúc Mừng Em Bé Iuuu!</div>
+                    <div class="reward-details">
+                        <p class="reward-item">💖 <strong>Vé massage đấm bóp trị liệu cho em hằng ngày</strong></p>
+                        <p class="reward-item">💖 <strong>Ngàn nụ hôn chụt chụt từ anh nè 😘 </strong> </p>
+                        <p class="reward-item">💖 <strong>Vạn cái ôm ấm áp từ anh 🤗 </strong> </p>
+                    </div>
+                    <div class="reward-issuer">Người phát hành: <strong>Anh iu cụa eim ❤️</strong></div>
+                </div>
+
+                <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
+            </div>
+
+            <p id="scratch-progress-text" class="text-xs text-muted mt-3">Đã cào: 0% (Hãy cào trên 50% để mở khóa hoàn toàn)</p>
+        </section>
+        -->
+
+        <!-- SECTION 5: BỨC TÂM THƯ TÌNH CẢM -->
+        <section class="section letter-section" id="letter-section">
+            <div class="section-badge fade-up">💌 Thư gửi từ trái tim</div>
+            <h2 class="section-title font-handwriting fade-up">Bức Thư Dành Riêng Em</h2>
+
+            <div class="letter-card glass-panel fade-up delay-1">
+                <div class="letter-stamp">🌹 01.09</div>
+                <div class="letter-header font-handwriting">
+                    Em bé iuuu cụa anh,
+                </div>
+                <div class="letter-body">
+                    <p>
+                        Hôm nay là một ngày vô cùng đặc biệt — ngày mà một thiên thần nhỏ đáng yêu cụa anh chào đời, để
+                        anh có cơ hội tuyệt vời được gặp em và yêu thương em ngày hôm nay 💖.
+                    </p>
+                    <p>
+                        Chúc em bé bước sang tuổi mới luôn giữ nụ cười rạng rỡ trên môi, mỗi ngày trôi qua đều ngập tràn
+                        niềm vui, may mắn và những điều ngọt ngào nhất 💫. Chúc em trên con đường sự nghiệp sẽ
+                        luôn gặp may mắn và gặt hái được nhiều thành công, tiền vô như nước 💰. Dù có chuyện gì xảy ra,
+                        hãy nhớ rằng anh sẽ luôn
+                        ở đây, đồng hành, bảo vệ và yêu thương em nhiều hơn mỗi ngày.
+                    </p>
+                    <p>
+                        Cảm ơn em vì đã luôn là nguồn động lực ấm áp và mục tiêu để anh cố gắng mỗi ngày. Chúc mừng sinh
+                        nhật công chúa của anh! 🎉🎂💖
+                    </p>
+                </div>
+                <div class="letter-footer font-handwriting">
+                    <span class="love-phrase">Yêu em gấc nhìuuuu,</span>
+                    <span class="sender-name">Anh iu cụa eim ❤️</span>
+                </div>
+            </div>
+
+            <!-- Final Love Fireworks Trigger -->
+            <div class="final-actions fade-up delay-2">
+                <button id="final-fireworks-btn" class="primary-btn pulse-btn">
+                    <span>Bắn tim tặng em bé 💕</span>
+                </button>
+            </div>
+
+            <!-- FOOTER -->
+            <footer class="app-footer">
+                <p>Made with all my love for <strong>Em bé Hồng Oanh ❤️</strong></p>
+                <p class="copyright">Happy Birthday 01.09.2003 ✨</p>
+            </footer>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
